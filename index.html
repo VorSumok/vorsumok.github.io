@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Деревенские гурманы</title>
+    <style>
+      :root {
+        --bg: #e8e1c9;
+        --paper: #f6f0de;
+        --paper-soft: #f1ead7;
+        --green: #2f6a37;
+        --green-dark: #24522b;
+        --green-soft: #dce7d7;
+        --text: #2b241b;
+        --text-soft: #5b5143;
+        --border: #d8cfb5;
+        --shadow: 0 18px 40px rgba(43, 36, 27, 0.08);
+        --shadow-soft: 0 8px 18px rgba(43, 36, 27, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 460px;
+        margin: 0 auto;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 70vh; /* растягиваем hero */
+      }
+
+      .hero-bg,
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+      }
+
+      .hero-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .hero-overlay {
+        background: linear-gradient(    180deg,    rgba(0, 0, 0, 0.25) 0%,    rgba(0, 0, 0, 0.35) 40%,    rgba(232, 225, 201, 0.85) 75%,    rgba(232, 225, 201, 1) 100%) !important;
+      }
+
+      .hero-inner {
+        position: relative;
+        padding-top: 16px;
+        padding-bottom: 40px;
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* растягиваем контент */
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        max-width: 100%;
+        padding: 10px 12px;
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(4px);
+      }
+
+      .brand-logo {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        overflow: hidden;
+        border: 1px solid rgba(47, 106, 55, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .brand-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .brand-meta {
+        min-width: 0;
+      }
+
+      .brand-kicker {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .brand-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .hero-copy {
+        width: 100%;
+        padding-top: 32px;
+        padding-bottom: 16px;
+      }
+
+      .pill {
+        display: inline-flex;
+        max-width: 100%;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .pill-light {
+        background: var(--paper);
+        color: var(--green-dark);
+        box-shadow: 0 6px 12px rgba(43, 36, 27, 0.06);
+      }
+
+      .pill-soft {
+        background: var(--paper-soft);
+        color: var(--green-dark);
+      }
+
+      .pill-green {
+        background: var(--green-soft);
+        color: var(--green-dark);
+      }
+
+      .pill-warm {
+        background: #e7ded0;
+        color: var(--green-dark);
+      }
+
+      .hero h1,
+      h2 {
+        margin: 0;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+      }
+
+      .hero h1 {
+        max-width: 100%;
+        margin-top: 12px;
+        font-size: 30px;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+        color: #fff;
+      }
+
+      .hero-lead {
+        max-width: 100%;
+        margin: 12px 0 0;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .hero-actions {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .primary-btn,
+      .bottom-btn {
+        display: block;
+        padding: 14px 18px;
+        border-radius: 20px;
+        background: var(--green);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(36, 82, 43, 0.2);
+      }
+
+      .social-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .social-btn {
+        min-width: 0;
+        padding: 12px 6px;
+        border: 1px solid rgba(36, 82, 43, 0.2);
+        border-radius: 16px;
+        background: var(--paper);
+        color: var(--green-dark);
+        box-shadow: 0 6px 12px rgba(43, 36, 27, 0.05);
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .social-btn span {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      main {
+        padding-bottom: 128px;
+      }
+
+      .section {
+        padding-top: 40px;
+      }
+
+      .card {
+	margin-top: 10px;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .card p,
+      .section p,
+      .benefit-text,
+      .discover-text,
+      .contact-text {
+        margin: 0;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+        color: var(--text-soft);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .intro-strong {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .section-title {
+        max-width: 100%;
+        margin-top: 16px;
+        font-size: 28px;
+        line-height: 1.15;
+        text-wrap: balance;
+      }
+
+      .text-stack {
+        display: grid;
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .benefits {
+        display: grid;
+        gap: 12px;
+      }
+
+      .benefit {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 26px;
+        background: var(--paper);
+      }
+
+      .benefit-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        flex: 0 0 28px;
+        border-radius: 999px;
+        background: var(--green);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .discoveries {
+        display: grid;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .discover {
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: #fcf8ee;
+      }
+
+      .accent-card {
+	margin-top: 10px;
+        padding: 20px;
+        border-radius: 28px;
+        background: var(--green);
+        color: #fff;
+        box-shadow: 0 14px 30px rgba(36, 82, 43, 0.18);
+      }
+
+      .accent-card p {
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .carousel-wrap {
+        padding-top: 32px;
+      }
+
+      .carousel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .carousel-hint {
+        font-size: 11px;
+        color: #7a6b57;
+      }
+
+      .carousel {
+        margin: 0 -16px;
+        padding: 0 16px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 16px;
+        scroll-padding-right: 16px;
+        overscroll-behavior-x: contain;
+      }
+
+      .carousel::-webkit-scrollbar {
+        display: none;
+      }
+
+      .carousel-track {
+        display: flex;
+        gap: 12px;
+        padding-bottom: 4px;
+      }
+
+      .carousel-item {
+        display: block;
+        flex: 0 0 84%;
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        overflow: hidden;
+        background: var(--paper);
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        cursor: pointer;
+      }
+
+      .carousel-item img {
+        width: 100%;
+        height: 256px;
+        object-fit: cover;
+      }
+	.location-card {
+  margin-top: 10px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.location-kicker {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-dark);
+}
+
+.location-title {
+  margin-top: 8px;
+  font-size: 28px;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.location-text {
+  margin-top: 12px;
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.location-address {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: #fcf8ee;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.location-map {
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: #e5dcc5;
+  min-height: 320px;
+}
+
+.location-map > ymaps,
+.location-map > div,
+.location-map iframe {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+}
+
+	.route-btn {
+  display: block;
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 20px;
+  background: var(--green);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(36, 82, 43, 0.2);
+}
+      .contact-card {
+        padding: 20px;
+        border-radius: 30px;
+        background: var(--green-dark);
+        color: #fff;
+        box-shadow: 0 18px 40px rgba(36, 82, 43, 0.22);
+      }
+
+      .contact-kicker {
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #dccea8;
+      }
+
+      .contact-title {
+        max-width: 100%;
+        margin-top: 8px;
+        font-size: 28px;
+        line-height: 1.15;
+        text-wrap: balance;
+      }
+
+      .contact-text {
+        margin-top: 12px !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+      }
+
+      .contact-links {
+        display: grid;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .contact-link {
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        background: var(--paper);
+        color: var(--green-dark);
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .bottom-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        border-top: 1px solid var(--border);
+        background: rgba(246, 240, 222, 0.92);
+        backdrop-filter: blur(12px);
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: none;
+        background: rgba(0, 0, 0, 0.92);
+      }
+
+      .lightbox.is-open {
+        display: block;
+      }
+
+      .lightbox-stage {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 24px 16px;
+      }
+
+      .lightbox-image {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 24px;
+        object-fit: contain;
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+      }
+
+      .lb-btn,
+      .lb-counter {
+        position: absolute;
+        z-index: 2;
+      }
+
+      .lb-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      .lb-close {
+        top: 16px;
+        right: 16px;
+      }
+
+      .lb-prev {
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+      }
+
+      .lb-next {
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+      }
+
+      .lb-counter {
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 14px;
+      }
+
+      @media (min-width: 480px) {
+        .hero h1 {
+          font-size: 38px;
+        }
+
+        .card,
+        .accent-card,
+        .contact-card {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <img class="hero-bg" src="/images/photo-03.jpg" alt="Ферма Деревенские гурманы" />
+        <div class="hero-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.35) 40%, rgba(232,225,201,0.9) 100%);"></div>
+
+        <div class="container hero-inner">
+          <!-- убрали стеклянную карточку, оставили живой логотип -->
+          <div style="display:flex;align-items:center;gap:10px;">
+            <img src="/logo.png" alt="Логотип" style="width:52px;height:52px;border-radius:50%;object-fit:cover;background:#fff;" />
+            <div style="color:#fff;">
+              <div style="font-size:10px;letter-spacing:0.24em;text-transform:uppercase;opacity:0.8;">ферма</div>
+              <div style="font-size:18px;font-weight:700;">Деревенские гурманы</div>
+            </div>
+          </div>
+
+          <!-- текст теперь "лежит" на фото -->
+          <div class="hero-copy" style="padding-top:48px;">
+            <div class="pill pill-light" style="opacity:0.9;">органическое пространство</div>
+            <h1 style="text-shadow:0 6px 18px rgba(0,0,0,0.35);">
+              Место, где природа возвращает к себе
+            </h1>
+            <p class="hero-lead" style="text-shadow:0 4px 12px rgba(0,0,0,0.3);">
+              Живая ферма, где растёт настоящая еда, звучит тишина и возвращается ощущение простых вещей.
+            </p>
+          </div>
+
+          <!-- кнопки оставляем, но чуть ниже и легче -->
+          <div class="hero-actions" style="margin-top:16px;">
+            <a class="primary-btn" href="#visit">Узнать, что ждёт на ферме</a>
+            <div class="social-grid">
+              <a class="social-btn" href="https://t.me/derevenskie_gurmany" target="_blank"><span>Telegram</span></a>
+              <a class="social-btn" href="https://www.instagram.com/derevenskie_gurmany?igsh=cDZvaHc1ajN5Zm9x" target="_blank"><span>Instagram</span></a>
+              <a class="social-btn" href="https://max.ru/join/kqSbGa8zxRLzp50lZ_9ujvagApac_3PtLc4qDO6oZ3c" target="_blank"><span>Max</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main class="container">
+        <section class="card">
+          <p>
+            <span class="intro-strong">Дорогой друг,</span> приглашаем тебя на нашу уникальную ферму — место,
+            где оживают традиции органического земледелия наших предков и где можно по‑настоящему обрести себя.
+          </p>
+        </section>
+
+        <section class="carousel-wrap" data-carousel="0">
+          <div class="carousel-head">
+            <div class="pill pill-soft">настроение фермы</div>
+            <div class="carousel-hint">свайпни →</div>
+          </div>
+          <div class="carousel">
+            <div class="carousel-track">
+              <button class="carousel-item" type="button" data-index="0"><img src="/images/photo-01.jpg" alt="Фото 1" /></button>
+              <button class="carousel-item" type="button" data-index="1"><img src="/images/photo-02.jpg" alt="Фото 2" /></button>
+              <button class="carousel-item" type="button" data-index="2"><img src="/images/photo-03.jpg" alt="Фото 3" /></button>
+		<button class="carousel-item" type="button" data-index="3"><img src="/images/photo-04.jpg" alt="Фото 4" /></button>
+		<button class="carousel-item" type="button" data-index="4"><img src="/images/photo-05.jpg" alt="Фото 5" /></button>
+		<button class="carousel-item" type="button" data-index="5"><img src="/images/photo-06.jpg" alt="Фото 6" /></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pill pill-soft">атмосфера</div>
+          <h2 class="section-title">Здесь легко замедлиться и услышать себя</h2>
+          <div class="text-stack">
+            <p>
+              Представь: ты оказываешься там, где каждый вдох наполнен ароматом свежей травы, а вокруг — гармония природы,
+              которую так легко потерять в городской суете.
+            </p>
+            <p>
+              Среди ухоженных грядок и дружелюбных животных ты вновь ощутишь себя частью чего‑то большего.
+              В нашем пространстве в согласии живут редкие животные, растут забытые овощи и травы, цветут удивительные растения.
+            </p>
+            <p>
+              Всё это возвращает к жизни древние знания, которые когда‑то были естественны для наших пращуров.
+            </p>
+          </div>
+        </section>
+
+        <section class="carousel-wrap" data-carousel="1">
+          <div class="carousel-head">
+            <div class="pill pill-soft">живые детали</div>
+            <div class="carousel-hint">свайпни →</div>
+          </div>
+          <div class="carousel">
+            <div class="carousel-track">
+              <button class="carousel-item" type="button" data-index="0"><img src="/images/photo-07.jpg" alt="Фото 7" /></button>
+              <button class="carousel-item" type="button" data-index="1"><img src="/images/photo-08.jpg" alt="Фото 8" /></button>
+              <button class="carousel-item" type="button" data-index="2"><img src="/images/photo-09.jpg" alt="Фото 9" /></button>
+		<button class="carousel-item" type="button" data-index="3"><img src="/images/photo-10.jpg" alt="Фото 10" /></button>
+		<button class="carousel-item" type="button" data-index="4"><img src="/images/photo-11.jpg" alt="Фото 11" /></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pill pill-green">с нами ты</div>
+          <div class="benefits">
+            <div class="benefit"><div class="benefit-num">1</div><p class="benefit-text">Отдохнёшь душой и отключишься от городского шума.</p></div>
+            <div class="benefit"><div class="benefit-num">2</div><p class="benefit-text">Откроешь для себя новые вкусы — от нежной зелени до ароматных сыров.</p></div>
+            <div class="benefit"><div class="benefit-num">3</div><p class="benefit-text">Удивишься тому, как много интересного скрыто в простых вещах.</p></div>
+            <div class="benefit"><div class="benefit-num">4</div><p class="benefit-text">Наполнишься вдохновением, которое дарят живые растения и добрые животные.</p></div>
+            <div class="benefit"><div class="benefit-num">5</div><p class="benefit-text">Почувствуешь прилив сил и энергии, идущей от земли.</p></div>
+          </div>
+        </section>
+
+        <section class="carousel-wrap" data-carousel="2">
+          <div class="carousel-head">
+            <div class="pill pill-soft">вкусы и открытия</div>
+            <div class="carousel-hint">свайпни →</div>
+          </div>
+          <div class="carousel">
+            <div class="carousel-track">
+              <button class="carousel-item" type="button" data-index="0"><img src="/images/photo-12.jpg" alt="Фото 1" /></button>
+              <button class="carousel-item" type="button" data-index="1"><img src="/images/photo-13.jpg" alt="Фото 2" /></button>
+              <button class="carousel-item" type="button" data-index="2"><img src="/images/photo-14.jpg" alt="Фото 3" /></button>
+		<button class="carousel-item" type="button" data-index="3"><img src="/images/photo-15.jpg" alt="Фото 3" /></button>
+		<button class="carousel-item" type="button" data-index="4"><img src="/images/photo-16.jpg" alt="Фото 3" /></button>
+		<button class="carousel-item" type="button" data-index="5"><img src="/images/photo-17.jpg" alt="Фото 3" /></button>
+		<button class="carousel-item" type="button" data-index="6"><img src="/images/photo-18.jpg" alt="Фото 3" /></button>
+		<button class="carousel-item" type="button" data-index="7"><img src="/images/photo-19.jpg" alt="Фото 3" /></button>
+		<button class="carousel-item" type="button" data-index="8"><img src="/images/photo-20.jpg" alt="Фото 3" /></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pill pill-warm">шаг за шагом</div>
+          <h2 class="section-title">От простого к удивительному</h2>
+          <div class="discoveries">
+            <div class="discover"><p class="discover-text">Освоишь секреты деревенской кухни: сможешь приготовить творог и сыр, научиться делать идеальный омлет.</p></div>
+            <div class="discover"><p class="discover-text">Разберёшься, какие растения идеально сочетаются друг с другом.</p></div>
+            <div class="discover"><p class="discover-text">Попробуешь необычные овощи и откроешь их подлинный вкус.</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pill pill-soft">новые вкусы</div>
+          <div class="accent-card">
+            <p>
+              Ты узнаешь, что такое кервель и почему пастернак стоит добавить в свой рацион. Увидишь, как растёт брюква,
+              и, быть может, решишься приготовить пареную репу — старинное блюдо, почти забытое сегодня.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card" style="box-shadow:none;">
+            <h2 class="section-title">Живая память о простых и важных вещах</h2>
+            <div class="text-stack">
+              <p>
+                Каждый момент здесь — это возможность услышать далёкий голос предков, попробовать на вкус то,
+                что забыли целые поколения, и создать свою новую реальность — более глубокую, осмысленную и наполнённую жизнью.
+              </p>
+              <p>Приходи — и сделай свою жизнь ярче, богаче, насыщеннее. Мы ждём тебя.</p>
+            </div>
+          </div>
+        </section>
+<section class="section">
+  <div class="location-card">
+    <div class="location-kicker">как нас найти</div>
+    <h2 class="location-title">Адрес и карта</h2>
+    <p class="location-text">
+      Приезжай в гости — покажем ферму, расскажем подробнее о пространстве и формате посещения.
+    </p>
+
+    <div class="location-address">
+      <strong>Адрес:</strong><br />
+      Гурьевский район, п. Славянское 1
+    </div>
+
+    <div class="location-map">
+      <script
+        type="text/javascript"
+        charset="utf-8"
+        async
+        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A00b92b317fc29f456ca7ce25d6c0707e0f0323b7f54d11a49af567f5471896cf&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"
+      ></script>
+    </div>
+
+    <a
+      class="route-btn"
+      href="https://yandex.ru/maps/?text=Гурьевский%20район,%20п.%20Славянское%201"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Построить маршрут
+    </a>
+  </div>
+</section>
+        <section id="visit" class="section">
+          <div class="contact-card">
+            <div class="contact-kicker">контакты</div>
+            <h2 class="contact-title">Запишись на знакомство с фермой</h2>
+            <p class="contact-text">
+              Выбери удобный способ связи — расскажем подробнее о ферме, атмосфере и формате посещения.
+            </p>
+            <div class="contact-links">
+              <a class="contact-link" href="https://t.me/derevenskie_gurmany" target="_blank" rel="noreferrer">Telegram</a>
+              <a class="contact-link" href="https://www.instagram.com/derevenskie_gurmany?igsh=cDZvaHc1ajN5Zm9x" target="_blank" rel="noreferrer">Instagram</a>
+              <a class="contact-link" href="https://max.ru/join/kqSbGa8zxRLzp50lZ_9ujvagApac_3PtLc4qDO6oZ3c" target="_blank" rel="noreferrer">Max</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-stage" id="lightboxStage">
+          <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Закрыть фото">×</button>
+          <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Предыдущее фото">‹</button>
+          <div class="lb-counter" id="lbCounter">1 / 3</div>
+          <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Следующее фото">›</button>
+          <img class="lightbox-image" id="lbImage" src="" alt="Увеличенное фото" />
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="container" style="padding-left:0;padding-right:0;">
+          <a class="bottom-btn" href="#visit">Связаться и приехать на ферму</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const carouselData = [
+        ['/images/photo-01.jpg', '/images/photo-02.jpg', '/images/photo-03.jpg', '/images/photo-04.jpg', '/images/photo-05.jpg', '/images/photo-06.jpg'],
+        ['/images/photo-07.jpg', '/images/photo-08.jpg', '/images/photo-09.jpg', '/images/photo-10.jpg', '/images/photo-11.jpg'],
+        ['/images/photo-12.jpg', '/images/photo-13.jpg', '/images/photo-14.jpg', '/images/photo-15.jpg', '/images/photo-16.jpg', '/images/photo-17.jpg', '/images/photo-18.jpg', '/images/photo-19.jpg', '/images/photo-20.jpg'],
+      ];
+
+      const carouselPositions = new Map();
+      const carouselElements = document.querySelectorAll('[data-carousel]');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxStage = document.getElementById('lightboxStage');
+      const lbImage = document.getElementById('lbImage');
+      const lbCounter = document.getElementById('lbCounter');
+      const lbClose = document.getElementById('lbClose');
+      const lbPrev = document.getElementById('lbPrev');
+      const lbNext = document.getElementById('lbNext');
+
+      let lightboxState = null;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      function updateLightbox() {
+        if (!lightboxState) return;
+        const images = carouselData[lightboxState.groupIndex] || [];
+        const src = images[lightboxState.photoIndex];
+        lbImage.src = src;
+        lbCounter.textContent = `${lightboxState.photoIndex + 1} / ${images.length}`;
+      }
+
+      function openLightbox(groupIndex, photoIndex) {
+        lightboxState = { groupIndex, photoIndex };
+        updateLightbox();
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightboxState = null;
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function showPrev() {
+        if (!lightboxState) return;
+        const images = carouselData[lightboxState.groupIndex] || [];
+        lightboxState.photoIndex = (lightboxState.photoIndex - 1 + images.length) % images.length;
+        updateLightbox();
+      }
+
+      function showNext() {
+        if (!lightboxState) return;
+        const images = carouselData[lightboxState.groupIndex] || [];
+        lightboxState.photoIndex = (lightboxState.photoIndex + 1) % images.length;
+        updateLightbox();
+      }
+
+      carouselElements.forEach((section, groupIndex) => {
+        const scroller = section.querySelector('.carousel');
+        const buttons = section.querySelectorAll('.carousel-item');
+
+        scroller.addEventListener('scroll', () => {
+          carouselPositions.set(groupIndex, scroller.scrollLeft);
+        }, { passive: true });
+
+        buttons.forEach((button, photoIndex) => {
+          button.addEventListener('click', () => {
+            carouselPositions.set(groupIndex, scroller.scrollLeft);
+            openLightbox(groupIndex, photoIndex);
+          });
+        });
+
+        requestAnimationFrame(() => {
+          const saved = carouselPositions.get(groupIndex) || 0;
+          scroller.scrollLeft = saved;
+        });
+      });
+
+      lbClose.addEventListener('click', (event) => {
+        event.stopPropagation();
+        closeLightbox();
+      });
+
+      lbPrev.addEventListener('click', (event) => {
+        event.stopPropagation();
+        showPrev();
+      });
+
+      lbNext.addEventListener('click', (event) => {
+        event.stopPropagation();
+        showNext();
+      });
+
+      lightbox.addEventListener('click', () => {
+        closeLightbox();
+      });
+
+      lightboxStage.addEventListener('click', (event) => {
+        if (event.target === lbImage) {
+          event.stopPropagation();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (!lightboxState) return;
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') showPrev();
+        if (event.key === 'ArrowRight') showNext();
+      });
+
+      lightboxStage.addEventListener('touchstart', (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive: true });
+
+      lightboxStage.addEventListener('touchend', (event) => {
+        touchEndX = event.changedTouches[0].clientX;
+        const delta = touchEndX - touchStartX;
+        if (Math.abs(delta) < 40) return;
+        if (delta > 0) showPrev();
+        if (delta < 0) showNext();
+      }, { passive: true });
+    </script>
+  </body>
+</html>
