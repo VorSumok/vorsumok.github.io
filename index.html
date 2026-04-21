@@ -278,7 +278,48 @@
         font-size: 15px;
         line-height: 1.8;
       }
+		
+	.contact-phones {
+	  display: grid;
+	  gap: 10px;
+	  margin-top: 16px;
+	}
+	
+	.contact-phone {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  gap: 12px;
+	  padding: 14px 16px;
+	  border-radius: 18px;
+	  background: rgba(255,255,255,0.08);
+	  border: 1px solid rgba(255,255,255,0.12);
+	}
 
+	.contact-phone-text {
+	  display: flex;
+	  flex-direction: column;
+	}
+	
+	.contact-phone-label {
+	  font-size: 12px;
+	  color: rgba(255,255,255,0.7);
+	}
+	
+	.contact-phone-number {
+	  font-size: 16px;
+	  font-weight: 700;
+	  color: #fff;
+	}
+
+	.contact-call-btn {
+	  padding: 10px 14px;
+	  border-radius: 14px;
+	  background: var(--paper);
+	  color: var(--green-dark);
+	  font-size: 13px;
+	  font-weight: 700;
+	}
       .intro-strong {
         color: var(--text);
         font-weight: 700;
@@ -821,18 +862,45 @@
   </div>
 </section>
         <section id="visit" class="section">
-          <div class="contact-card">
-            <div class="contact-kicker">контакты</div>
-            <h2 class="contact-title">Запишись на знакомство с фермой</h2>
-            <p class="contact-text">
-              Выбери удобный способ связи — расскажем подробнее о ферме, атмосфере и формате посещения.
-            </p>
-            <div class="contact-links">
-              <a class="contact-link" href="https://t.me/derevenskie_gurmany" target="_blank" rel="noreferrer">Telegram</a>
-              <a class="contact-link" href="https://www.instagram.com/derevenskie_gurmany?igsh=cDZvaHc1ajN5Zm9x" target="_blank" rel="noreferrer">Instagram</a>
-              <a class="contact-link" href="https://max.ru/join/kqSbGa8zxRLzp50lZ_9ujvagApac_3PtLc4qDO6oZ3c" target="_blank" rel="noreferrer">Max</a>
-            </div>
-          </div>
+<div class="contact-card">
+  <div class="contact-kicker">контакты</div>
+
+  <h2 class="contact-title">Запишись на знакомство с фермой</h2>
+
+  <p class="contact-text">
+    Выбери удобный способ связи — расскажем подробнее о ферме, атмосфере и формате посещения.
+  </p>
+
+  <div class="contact-phones">
+    <div class="contact-phone">
+      <div class="contact-phone-text">
+        <div class="contact-phone-label">Запись и вопросы</div>
+        <div class="contact-phone-number">+7 911 852-27-12 Владислава</div>
+      </div>
+      <a class="contact-call-btn" href="tel:+79118522712">Позвонить</a>
+    </div>
+
+    <div class="contact-phone">
+      <div class="contact-phone-text">
+        <div class="contact-phone-label">WhatsApp / Telegram</div>
+        <div class="contact-phone-number">+7 981 453-95-85 Татьяна</div>
+      </div>
+      <a class="contact-call-btn" href="tel:+79814539585">Позвонить</a>
+    </div>
+  </div>
+	
+  <div class="contact-links">
+    <a class="contact-link" href="https://t.me/derevenskie_gurmany" target="_blank">
+      Telegram
+    </a>
+    <a class="contact-link" href="https://www.instagram.com/derevenskie_gurmany?igsh=cDZvaHc1ajN5Zm9x" target="_blank">
+      Instagram
+    </a>
+    <a class="contact-link" href="https://max.ru/join/kqSbGa8zxRLzp50lZ_9ujvagApac_3PtLc4qDO6oZ3c" target="_blank">
+      Max
+    </a>
+  </div>
+</div>
         </section>
       </main>
 
