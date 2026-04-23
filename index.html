@@ -434,16 +434,44 @@
       }
 
       .carousel-item {
-        display: block;
-        flex: 0 0 84%;
-        border: 1px solid var(--border);
-        border-radius: 28px;
-        overflow: hidden;
-        background: var(--paper);
-        scroll-snap-align: center;
-        scroll-snap-stop: always;
-        cursor: pointer;
-      }
+  position: relative;
+  display: block;
+  flex: 0 0 84%;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--paper);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  cursor: pointer;
+}
+
+.photo-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px 16px 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.65) 100%
+  );
+  color: #fff;
+  text-align: left;
+}
+
+.photo-caption-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.photo-caption-subtitle {
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: 0.85;
+}
 
       .carousel-item img {
         width: 100%;
@@ -671,11 +699,10 @@
   <body>
     <div class="page">
       <section class="hero">
-        <img class="hero-bg" src="/images/photo-03.jpg" alt="Ферма Деревенские гурманы" />
+        <img class="hero-bg" src="/images/Hero.jpg" alt="Ферма Деревенские гурманы" />
         <div class="hero-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.35) 40%, rgba(232,225,201,0.9) 100%);"></div>
 
         <div class="container hero-inner">
-          <!-- убрали стеклянную карточку, оставили живой логотип -->
           <div style="display:flex;align-items:center;gap:10px;">
             <img src="/logo.png" alt="Логотип" style="width:52px;height:52px;border-radius:50%;object-fit:cover;background:#fff;" />
             <div style="color:#fff;">
@@ -684,7 +711,6 @@
             </div>
           </div>
 
-          <!-- текст теперь "лежит" на фото -->
           <div class="hero-copy" style="padding-top:48px;">
             <div class="pill pill-light" style="opacity:0.9;">органическое пространство</div>
             <h1 style="text-shadow:0 6px 18px rgba(0,0,0,0.35);">
@@ -695,7 +721,6 @@
             </p>
           </div>
 
-          <!-- кнопки оставляем, но чуть ниже и легче -->
           <div class="hero-actions" style="margin-top:16px;">
             <a class="primary-btn" href="#visit">Узнать, что ждёт на ферме</a>
             <div class="social-grid">
@@ -709,7 +734,7 @@
       <main class="container">
         <section class="card">
           <p>
-            <span class="intro-strong">Дорогой друг,</span> приглашаем тебя на нашу уникальную ферму — место,
+            <span class="intro-strong">Дорогие друзья,</span> приглашаем вас на нашу уникальную ферму — место,
             где оживают традиции органического земледелия наших предков и где можно по‑настоящему обрести себя.
           </p>
         </section>
@@ -717,7 +742,7 @@
         <section class="carousel-wrap" data-carousel="0">
           <div class="carousel-head">
             <div class="pill pill-soft">настроение фермы</div>
-            <div class="carousel-hint">свайпни →</div>
+            <div class="carousel-hint">свайпните →</div>
           </div>
           <div class="carousel">
             <div class="carousel-track">
@@ -736,11 +761,11 @@
           <h2 class="section-title">Здесь легко замедлиться и услышать себя</h2>
           <div class="text-stack">
             <p>
-              Представь: ты оказываешься там, где каждый вдох наполнен ароматом свежей травы, а вокруг — гармония природы,
+              Представьте: вы оказываетесь там, где каждый вдох наполнен ароматом свежей травы, а вокруг — гармония природы,
               которую так легко потерять в городской суете.
             </p>
             <p>
-              Среди ухоженных грядок и дружелюбных животных ты вновь ощутишь себя частью чего‑то большего.
+              Среди ухоженных грядок и дружелюбных животных вы вновь ощутите себя частью чего‑то большего.
               В нашем пространстве в согласии живут редкие животные, растут забытые овощи и травы, цветут удивительные растения.
             </p>
             <p>
@@ -752,7 +777,7 @@
         <section class="carousel-wrap" data-carousel="1">
           <div class="carousel-head">
             <div class="pill pill-soft">живые детали</div>
-            <div class="carousel-hint">свайпни →</div>
+            <div class="carousel-hint">свайпните →</div>
           </div>
           <div class="carousel">
             <div class="carousel-track">
@@ -766,32 +791,53 @@
         </section>
 
         <section class="section">
-          <div class="pill pill-green">с нами ты</div>
+          <div class="pill pill-green">с нами вы</div>
           <div class="benefits">
-            <div class="benefit"><div class="benefit-num">1</div><p class="benefit-text">Отдохнёшь душой и отключишься от городского шума.</p></div>
-            <div class="benefit"><div class="benefit-num">2</div><p class="benefit-text">Откроешь для себя новые вкусы — от нежной зелени до ароматных сыров.</p></div>
-            <div class="benefit"><div class="benefit-num">3</div><p class="benefit-text">Удивишься тому, как много интересного скрыто в простых вещах.</p></div>
-            <div class="benefit"><div class="benefit-num">4</div><p class="benefit-text">Наполнишься вдохновением, которое дарят живые растения и добрые животные.</p></div>
-            <div class="benefit"><div class="benefit-num">5</div><p class="benefit-text">Почувствуешь прилив сил и энергии, идущей от земли.</p></div>
+            <div class="benefit"><div class="benefit-num">1</div><p class="benefit-text">Отдохнёте душой и отключитесь от городского шума.</p></div>
+            <div class="benefit"><div class="benefit-num">2</div><p class="benefit-text">Откроете для себя новые вкусы — от нежной зелени до ароматных сыров.</p></div>
+            <div class="benefit"><div class="benefit-num">3</div><p class="benefit-text">Удивитесь тому, как много интересного скрыто в простых вещах.</p></div>
+            <div class="benefit"><div class="benefit-num">4</div><p class="benefit-text">Наполнитесь вдохновением, которое дарят живые растения и добрые животные.</p></div>
+            <div class="benefit"><div class="benefit-num">5</div><p class="benefit-text">Почувствуете прилив сил и энергии, идущей от земли.</p></div>
           </div>
         </section>
 
         <section class="carousel-wrap" data-carousel="2">
           <div class="carousel-head">
             <div class="pill pill-soft">вкусы и открытия</div>
-            <div class="carousel-hint">свайпни →</div>
+            <div class="carousel-hint">свайпните →</div>
           </div>
           <div class="carousel">
             <div class="carousel-track">
-              <button class="carousel-item" type="button" data-index="0"><img src="/images/photo-12.jpg" alt="Фото 1" /></button>
-              <button class="carousel-item" type="button" data-index="1"><img src="/images/photo-13.jpg" alt="Фото 2" /></button>
-              <button class="carousel-item" type="button" data-index="2"><img src="/images/photo-14.jpg" alt="Фото 3" /></button>
-		<button class="carousel-item" type="button" data-index="3"><img src="/images/photo-15.jpg" alt="Фото 3" /></button>
-		<button class="carousel-item" type="button" data-index="4"><img src="/images/photo-16.jpg" alt="Фото 3" /></button>
-		<button class="carousel-item" type="button" data-index="5"><img src="/images/photo-17.jpg" alt="Фото 3" /></button>
-		<button class="carousel-item" type="button" data-index="6"><img src="/images/photo-18.jpg" alt="Фото 3" /></button>
-		<button class="carousel-item" type="button" data-index="7"><img src="/images/photo-19.jpg" alt="Фото 3" /></button>
-		<button class="carousel-item" type="button" data-index="8"><img src="/images/photo-20.jpg" alt="Фото 3" /></button>
+              <button class="carousel-item" type="button" data-index="0"><img src="/images/photo-12.jpg" alt="Фото 1" />
+	<div class="photo-caption">
+    	<div class="photo-caption-title">Ресторан Телеграф</div>
+    	<div class="photo-caption-subtitle">Шеф-повар: Кулясов Дмитрий</div>
+  </div></button>
+              <button class="carousel-item" type="button" data-index="1"><img src="/images/photo-13.jpg" alt="Фото 2" />
+	<div class="photo-caption">
+    	<div class="photo-caption-title">Ресторан: Seasons</div>
+    	<div class="photo-caption-subtitle">Шеф-повар: Мусаев Курбан</div>
+  </div></button>
+              <button class="carousel-item" type="button" data-index="2"><img src="/images/photo-14.jpg" alt="Фото 3" />
+	<div class="photo-caption">
+    	<div class="photo-caption-title">Ресторан: Мадам Буше</div>
+    	<div class="photo-caption-subtitle">Шеф-повар: Шмыга Артём</div>
+  </div></button>
+		<button class="carousel-item" type="button" data-index="3"><img src="/images/photo-15.jpg" alt="Фото 4" />
+	<div class="photo-caption">
+    	<div class="photo-caption-title">Ресторан: Соль</div>
+    	<div class="photo-caption-subtitle">Шеф-повар: Иван Куликов</div>
+  </div></button>
+		<button class="carousel-item" type="button" data-index="4"><img src="/images/photo-16.jpg" alt="Фото 5" />
+	<div class="photo-caption">
+    	<div class="photo-caption-title">Ресторан: Local</div>
+    	<div class="photo-caption-subtitle">Шеф-повар: Алекс Потёмкинс</div>
+  </div></button>
+		<button class="carousel-item" type="button" data-index="5"><img src="/images/photo-17.jpg" alt="Фото 6" />
+	<div class="photo-caption">
+    	<div class="photo-caption-title">Ресторан: История в тарелке</div>
+    	<div class="photo-caption-subtitle">Шеф-повар: Вьюник Вячеслав</div>
+  </div></button>
             </div>
           </div>
         </section>
@@ -799,19 +845,20 @@
         <section class="section">
           <div class="pill pill-warm">шаг за шагом</div>
           <h2 class="section-title">От простого к удивительному</h2>
+
           <div class="discoveries">
-            <div class="discover"><p class="discover-text">Освоишь секреты деревенской кухни: сможешь приготовить творог и сыр, научиться делать идеальный омлет.</p></div>
-            <div class="discover"><p class="discover-text">Разберёшься, какие растения идеально сочетаются друг с другом.</p></div>
-            <div class="discover"><p class="discover-text">Попробуешь необычные овощи и откроешь их подлинный вкус.</p></div>
+            <div class="discover"><p class="discover-text">Освоите секреты деревенской кухни: сможете приготовить творог и сыр, научиться делать идеальный омлет.</p></div>
+            <div class="discover"><p class="discover-text">Разберётесь, какие растения идеально сочетаются друг с другом.</p></div>
+            <div class="discover"><p class="discover-text">Попробуете необычные овощи и откроете их подлинный вкус.</p></div>
+	<div class="discover"><p class="discover-text">Вы узнаете, что такое кервель и почему пастернак стоит добавить в свой рацион.</p></div>
           </div>
         </section>
 
         <section class="section">
-          <div class="pill pill-soft">новые вкусы</div>
-          <div class="accent-card">
-            <p>
-              Ты узнаешь, что такое кервель и почему пастернак стоит добавить в свой рацион. Увидишь, как растёт брюква,
-              и, быть может, решишься приготовить пареную репу — старинное блюдо, почти забытое сегодня.
+          <div class="pill pill-soft">выбор лучших</div>
+          <div class="accent-card">       <p>
+  Наши уникальные овощи — визитная карточка лучших ресторанов региона.
+  Мы гордимся доверием ведущих шеф-поваров, которые выбирают нас за качество и вкус.
             </p>
           </div>
         </section>
@@ -824,7 +871,7 @@
                 Каждый момент здесь — это возможность услышать далёкий голос предков, попробовать на вкус то,
                 что забыли целые поколения, и создать свою новую реальность — более глубокую, осмысленную и наполнённую жизнью.
               </p>
-              <p>Приходи — и сделай свою жизнь ярче, богаче, насыщеннее. Мы ждём тебя.</p>
+              <p>Приходите — и сделайте свою жизнь ярче, богаче, насыщеннее. Мы ждём вас.</p>
             </div>
           </div>
         </section>
@@ -833,7 +880,7 @@
     <div class="location-kicker">как нас найти</div>
     <h2 class="location-title">Адрес и карта</h2>
     <p class="location-text">
-      Приезжай в гости — покажем ферму, расскажем подробнее о пространстве и формате посещения.
+      Приезжайте в гости — покажем ферму, расскажем подробнее о пространстве и формате посещения.
     </p>
 
     <div class="location-address">
@@ -864,26 +911,25 @@
 <div class="contact-card">
   <div class="contact-kicker">контакты</div>
 
-  <h2 class="contact-title">Запишись на знакомство с фермой</h2>
+  <h2 class="contact-title">Запишитесь на знакомство с фермой</h2>
 
   <p class="contact-text">
-    Выбери удобный способ связи — расскажем подробнее о ферме, атмосфере и формате посещения.
+    Выберите удобный способ связи — расскажем подробнее о ферме, атмосфере и формате посещения.
   </p>
-
   <div class="contact-card">
   <div class="contact-kicker">контакты</div>
 
-  <h2 class="contact-title">Свяжись с нами</h2>
+  <h2 class="contact-title">Свяжитесь с нами</h2>
 
   <p class="contact-text">
-    Напиши или позвони — ответим на вопросы, расскажем про ферму и поможем записаться.
+    Напишите или позвоните — ответим на вопросы, расскажем про ферму и поможем записаться.
   </p>
 
   <div class="contact-phones">
     
     <div class="contact-phone">
       <div class="contact-phone-text">
-        <div class="contact-phone-label">Менеджер</div>
+        <div class="contact-phone-label">Организатор мероприятий</div>
         <div class="contact-phone-number">Владислава</div>
         <div class="contact-phone-label">+7 911 852-27-12</div>
       </div>
@@ -892,7 +938,7 @@
 
     <div class="contact-phone">
       <div class="contact-phone-text">
-        <div class="contact-phone-label">Менеджер</div>
+        <div class="contact-phone-label">Куратор фермы</div>
         <div class="contact-phone-number">Татьяна</div>
         <div class="contact-phone-label">+7 981 453-95-85 </div>
       </div>
@@ -934,7 +980,7 @@
       const carouselData = [
         ['/images/photo-01.jpg', '/images/photo-02.jpg', '/images/photo-03.jpg', '/images/photo-04.jpg', '/images/photo-05.jpg', '/images/photo-06.jpg'],
         ['/images/photo-07.jpg', '/images/photo-08.jpg', '/images/photo-09.jpg', '/images/photo-10.jpg', '/images/photo-11.jpg'],
-        ['/images/photo-12.jpg', '/images/photo-13.jpg', '/images/photo-14.jpg', '/images/photo-15.jpg', '/images/photo-16.jpg', '/images/photo-17.jpg', '/images/photo-18.jpg', '/images/photo-19.jpg', '/images/photo-20.jpg'],
+        ['/images/photo-12.jpg', '/images/photo-13.jpg', '/images/photo-14.jpg', '/images/photo-15.jpg', '/images/photo-16.jpg', '/images/photo-17.jpg'],
       ];
 
       const carouselPositions = new Map();
